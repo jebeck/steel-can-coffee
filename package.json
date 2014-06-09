@@ -1,0 +1,22 @@
+{
+  "name": "steel-can-coffee",
+  "version": "0.0.0",
+  "description": "\"visualization of data from this Thrillist article: http://www.thrillist.com/drink/nation/what-s-the-best-grocery-store-coffee-folgers-chock-full-onuts\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "coffee",
+    "data",
+    "visualization"
+  ],
+  "author": "Jana E. Beck",
+  "license": "GPLv3",
+  "dependencies": {
+    "browserify": "~4.1.8",
+    "d3": "~3.4.8",
+    "less": "~1.7.0",
+    "lodash": "~2.4.1"
+  }
+}

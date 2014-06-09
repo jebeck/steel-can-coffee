@@ -1,0 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+@import 'colors.less';
+
+body {
+  margin: 0;
+}
+
+#main {
+  width: 100vw;
+  height: 100vh;
+  background-color: @darkest;
+}
+
+.background-light {
+  fill: @light-gray;
+  opacity: 0.10;
+}
+
+.coffee-circle {
+  fill: @lightest;
+  stroke: @light;
+}
+
+.coffee-circle-ghost {
+  fill: none;
+  stroke-width: 1px;
+  stroke: @light-gray;
+}
+
+.coffee-brand {
+  fill: @dark;
+  font-family: 'Lobster', cursive;
+  text-anchor: middle;
+}
+
+.coffee-rank {
+  dominant-baseline: central;
+  fill: @coffee-warm;
+  font-family: 'Lobster', cursive;
+  font-weight: bold;
+  stroke: @light-gray;
+  stroke-width: 1px;
+  text-anchor: middle;
+}
