@@ -14,9 +14,15 @@
   "author": "Jana E. Beck",
   "license": "GPLv3",
   "dependencies": {
-    "browserify": "~4.1.8",
     "d3": "~3.4.8",
-    "less": "~1.7.0",
     "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.5",
+    "gulp-less": "~1.3.1",
+    "gulp-watchify": "~0.2.0",
+    "path": "~0.4.9",
+    "gulp-connect": "~2.0.5",
+    "gulp-rename": "~1.2.0"
   }
 }
