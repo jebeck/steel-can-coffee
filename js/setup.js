@@ -14,7 +14,7 @@ module.exports = function() {
   };
   var width = w - margin.left - margin.right;
   var height = h - margin.top - margin.bottom;
-  dimensions = {width: width, height: height};
+  var dimensions = {width: width, height: height};
 
   // append the main SVG element and group
   var svg = d3.select('#main')
@@ -76,6 +76,13 @@ module.exports = function() {
           y: this.h - (-(Math.cos(Math.PI/5) * bigR) + (this.h/2))
         },
         radius: littleR,
+        ranksToPosition: {
+          1: 'top',
+          2: 'rightMid',
+          3: 'rightBottom',
+          4: 'leftBottom',
+          5: 'leftMid'
+        },
         pathGenerator: this.pathGeneratorFn(textR)
       };
     };
@@ -103,7 +110,86 @@ module.exports = function() {
           y: 9 * this.h/10
         },
         radius: 0.45 * this.h/5,
+        ranksToPosition: {
+          1: 'top',
+          2: 'midTop',
+          3: 'mid',
+          4: 'midBottom',
+          5: 'bottom'
+        },
         pathGenerator: this.pathGeneratorFn(0.95 * (0.45 * this.h/5))
+      };
+    };
+
+    this.threeTwoVertical = function(dimensions) {
+      var margin = 10, width = dimensions.width, height = dimensions.height;
+      var r = (width - 2 * margin)/4;
+      return {
+        top: {
+          x: r + margin,
+          y: r + margin
+        },
+        topLeft: {
+          x: width - margin - r,
+          y: ((height/2 - (r + margin))/2) + r + margin
+        },
+        rightMid: {
+          x: r + margin,
+          y: height/2
+        },
+        bottomLeft: {
+          x: width - margin - r,
+          y: (((height - margin - r) - (height/2))/2) + height/2
+        },
+        bottom: {
+          x: r + margin,
+          y: height - margin - r
+        },
+        radius: r,
+        ranksToPosition: {
+          1: 'top',
+          2: 'topLeft',
+          3: 'rightMid',
+          4: 'bottomLeft',
+          5: 'bottom'
+        },
+        pathGenerator: this.pathGeneratorFn(0.95 * r)
+      };
+    };
+
+    this.threeTwoHorizontal = function(dimensions) {
+      var margin = 10, width = dimensions.width, height = dimensions.height;
+      var r = (height - 2* margin)/4;
+      return {
+        topLeft: {
+          x: margin + r,
+          y: margin + r
+        },
+        bottomLeft: {
+          x: width/2 - (((width/2) - (margin + r))/2),
+          y: height - margin - r
+        },
+        topMid: {
+          x: width/2,
+          y: margin + r
+        },
+        bottomRight: {
+          x: width/2 + (((width - margin - r) - (width/2))/2),
+          y: height - margin - r
+        },
+        topRight: {
+          x: width - margin - r,
+          y: margin + r
+        },
+        radius: r,
+        ranksToPosition: {
+          1: 'topLeft',
+          2: 'bottomLeft',
+          3: 'topMid',
+          4: 'bottomRight',
+          5: 'topRight'
+        },
+        pathGenerator: this.pathGeneratorFn(0.95 * r)
       };
     };
 

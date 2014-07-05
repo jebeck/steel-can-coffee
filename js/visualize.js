@@ -17,33 +17,31 @@ module.exports = function(opts) {
       'class': 'coffee-circle-group'
     });
 
-  function updateShape(aspectRatio) {
-    var shapes = new opts.Shapes();
+  function updateShape(dimensions) {
+    var shapes = new opts.Shapes(), aspectRatio;
 
     if (!arguments.length) {
       aspectRatio = shapes.w / shapes.h;
     }
-    if (aspectRatio > 1) {
-      shape = shapes.pentagon();
-
-      ranksToPosition = {
-        1: 'top',
-        2: 'rightMid',
-        3: 'rightBottom',
-        4: 'leftBottom',
-        5: 'leftMid'
-      };
+    else {
+      aspectRatio = dimensions.width/dimensions.height;
     }
-    else if (aspectRatio <= 1) {
-      shape = shapes.vertical();
 
-      ranksToPosition = {
-        1: 'top',
-        2: 'midTop',
-        3: 'mid',
-        4: 'midBottom',
-        5: 'bottom'
-      };
+    if (dimensions && dimensions.width <= 320) {
+      shape = shapes.threeTwoVertical(dimensions);
+      ranksToPosition = shape.ranksToPosition;
+    }
+    else if (dimensions && dimensions.height <= 320) {
+      shape = shapes.threeTwoHorizontal(dimensions);
+      ranksToPosition = shape.ranksToPosition;
+    }
+    else if (aspectRatio >= 0.95) {
+      shape = shapes.pentagon();
+      ranksToPosition = shape.ranksToPosition;
+    }
+    else if (aspectRatio < 0.95) {
+      shape = shapes.vertical();
+      ranksToPosition = shape.ranksToPosition;
     }
   }
 
@@ -130,7 +128,7 @@ module.exports = function(opts) {
   };
 
   this.update = function(dimensions) {
-    updateShape(dimensions.width/dimensions.height);
+    updateShape(dimensions);
     // TODO: query if aspect ratio changed significantly (i.e., requiring redraw)
     // and if not, return early!
 
