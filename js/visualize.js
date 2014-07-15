@@ -132,12 +132,7 @@ module.exports = function(opts) {
     // TODO: query if aspect ratio changed significantly (i.e., requiring redraw)
     // and if not, return early!
 
-    // update position of large and small circles
-    circles.selectAll('circle')
-      .attr({
-        cx: xPosition,
-        cy: yPosition
-      });
+    this.updatePosition();
 
     // update radius of large circles
     circles.selectAll('.coffee-circle')
@@ -147,6 +142,22 @@ module.exports = function(opts) {
     circles.selectAll('.coffee-circle-ghost')
       .attr('r', shape.radius/2);
 
+    // update position of coffee brand text
+    circles.selectAll('.coffee-brand')
+      .attr({
+        'font-size': (0.4 * shape.radius),
+        startOffset: '33%'
+      });
+  };
+
+  this.updatePosition = function() {
+    // update position of large and small circles
+    circles.selectAll('circle')
+      .attr({
+        cx: xPosition,
+        cy: yPosition
+      });
+
     // update paths for text in circle
     paths.attr({
       d: function(d) {
@@ -154,13 +165,6 @@ module.exports = function(opts) {
         return path.m + path.a;
       }
     });
-
-    // update position of coffee brand text
-    circles.selectAll('.coffee-brand')
-      .attr({
-        'font-size': (0.4 * shape.radius),
-        startOffset: '33%'
-      });
 
     // update position of coffee rank text
     circles.selectAll('.coffee-rank')
