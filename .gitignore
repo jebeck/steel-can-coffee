@@ -1,4 +1,6 @@
 .DS_Store
 *.css
+*.pxm
 build/
+fontello/
 node_modules/
