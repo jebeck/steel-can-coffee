@@ -1,9 +1,10 @@
+var _ = require('lodash');
 var d3 = require('d3');
 
 module.exports = function(opts) {
   opts = opts || {};
 
-  var shape, ranksToPosition, paths;
+  var shape, ranksToPosition, paths, currentRanks = [1,2,3,4,5];
   // initialize shape and ranksToPosition
   updateShape();
 
@@ -51,6 +52,42 @@ module.exports = function(opts) {
 
   var yPosition = function(d) {
     return shape[ranksToPosition[d.rank]].y;
+  };
+
+  function getCurrentPositions() {
+    return _.map(currentRanks, function(r) {
+      return ranksToPosition[r];
+    });
+  }
+
+  function updateRanksToPosition(currentPositions) {
+    _.map(currentRanks, function(r, i) {
+      ranksToPosition[r] = currentPositions[i];
+    });
+  }
+
+  this.cycleBackwards = function() {
+    var currentPositions = getCurrentPositions();
+
+    var first = currentRanks[0];
+    currentRanks = currentRanks.slice(1,5);
+    currentRanks.push(first);
+
+    updateRanksToPosition(currentPositions);
+
+    this.updatePosition(1000);
+  };
+
+  this.cycleForwards = function() {
+    var currentPositions = getCurrentPositions();
+
+    var last = currentRanks[4];
+    currentRanks = currentRanks.slice(0,4);
+    currentRanks.unshift(last);
+
+    updateRanksToPosition(currentPositions);
+
+    this.updatePosition(1000);
   };
 
   this.draw = function() {
@@ -132,7 +169,7 @@ module.exports = function(opts) {
     // TODO: query if aspect ratio changed significantly (i.e., requiring redraw)
     // and if not, return early!
 
-    this.updatePosition();
+    this.updatePosition(0);
 
     // update radius of large circles
     circles.selectAll('.coffee-circle')
@@ -150,16 +187,20 @@ module.exports = function(opts) {
       });
   };
 
-  this.updatePosition = function() {
+  this.updatePosition = function(duration) {
     // update position of large and small circles
     circles.selectAll('circle')
+      .transition()
+      .duration(duration)
       .attr({
         cx: xPosition,
         cy: yPosition
       });
 
     // update paths for text in circle
-    paths.attr({
+    paths.transition()
+      .duration(duration)
+      .attr({
       d: function(d) {
         var path = shape.pathGenerator(xPosition(d), yPosition(d));
         return path.m + path.a;
@@ -168,6 +209,8 @@ module.exports = function(opts) {
 
     // update position of coffee rank text
     circles.selectAll('.coffee-rank')
+      .transition()
+      .duration(duration)
       .attr({
         'font-size': (1.4 * shape.radius),
         x: xPosition,
