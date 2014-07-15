@@ -90,30 +90,30 @@ module.exports = function() {
     this.vertical = function() {
       return {
         top: {
-          x: this.w/2,
-          y: this.h/10
+          x: 3 * this.w/4,
+          y: this.h/8
         },
         midTop: {
-          x: this.w/2,
-          y: 3 * this.h/10
-        },
-        mid: {
-          x: this.w/2,
-          y: this.h/2
+          x: 3 * this.w/4,
+          y: 3 * this.h/8
         },
         midBottom: {
-          x: this.w/2,
-          y: 7 * this.h/10
+          x: 3 * this.w/4,
+          y: 5 * this.h/8
         },
         bottom: {
-          x: this.w/2,
-          y: 9 * this.h/10
+          x: 3 * this.w/4,
+          y: 7 * this.h/8
+        },
+        side: {
+          x: this.w/4,
+          y: this.h/2
         },
         radius: 0.45 * this.h/5,
         ranksToPosition: {
-          1: 'top',
-          2: 'midTop',
-          3: 'mid',
+          1: 'side',
+          2: 'top',
+          3: 'midTop',
           4: 'midBottom',
           5: 'bottom'
         },
