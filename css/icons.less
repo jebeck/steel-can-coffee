@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'coffee-icons';
+  src: url('../font/coffee-icons.eot?16546477');
+  src: url('../font/coffee-icons.eot?16546477#iefix') format('embedded-opentype'),
+       url('../font/coffee-icons.woff?16546477') format('woff'),
+       url('../font/coffee-icons.ttf?16546477') format('truetype'),
+       url('../font/coffee-icons.svg?16546477#coffee-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "coffee-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  opacity: .8; 
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-left:before { content: '\e800'; } /* '' */
+.icon-right:before { content: '\e801'; } /* '' */
+.icon-quote:before { content: '\e802'; } /* '' */
+.icon-home:before { content: '\e803'; } /* '' */

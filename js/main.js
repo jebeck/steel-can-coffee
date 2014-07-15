@@ -22,5 +22,11 @@ var coffee = require('./index');
       });
       viz.update(dimensions);
     });
+    d3.select('span.nav.back').on('click', function() {
+      viz.cycleBackwards();
+    });
+    d3.select('span.nav.forward').on('click', function() {
+      viz.cycleForwards();
+    });
   });
 })();

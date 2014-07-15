@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2014 by original authors @ fontello.com</metadata>
+<defs>
+<font id="coffee-icons" horiz-adv-x="1000" >
+<font-face font-family="coffee-icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="left" unicode="&#xe800;" d="m0 350l148 149 352 351 148-148-351-352 351-352-148-148-352 352z" horiz-adv-x="648" />
+<glyph glyph-name="right" unicode="&#xe801;" d="m0-2l352 352-352 352 148 148 352-351 148-149-148-148-352-352z" horiz-adv-x="648" />
+<glyph glyph-name="quote" unicode="&#xe802;" d="m0-62l0 437q0 71 15 129t38 97 61 67 72 45 83 28 82 14 81 7l37-176q-49-9-81-20t-66-31-48-53-10-77l131 0 0-467-395 0z m529 0l0 437q0 71 16 129t38 97 61 67 72 45 83 28 81 14 81 7l39-176q-51-9-83-20t-65-31-47-53-12-77l131 0 0-467-395 0z" horiz-adv-x="1000" />
+<glyph glyph-name="home" unicode="&#xe803;" d="m0-150l0 649 453 351 453-351 0-649-312 0 0 391-281 0 0-391-313 0z" horiz-adv-x="906" />
+</font>
+</defs>
+</svg>
