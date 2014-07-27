@@ -2,6 +2,35 @@
 @import 'colors.less';
 @import 'icons.less';
 
+.not-animated(@zero: 0) {
+  -o-animation: 0;
+  -moz-animation: 0;
+  -ms-animation: 0;
+  -webkit-animation: 0;
+  animation: 0;
+}
+
+.animated(@name, @seconds, @easing, @totaltime) {
+  -o-animation: @name @seconds @easing @totaltime;
+  -moz-animation: @name @seconds @easing @totaltime;
+  -ms-animation: @name @seconds @easing @totaltime;
+  -webkit-animation: @name @seconds @easing @totaltime;
+  animation: @name @seconds @easing @totaltime;
+}
+
+@-moz-keyframes breathing {
+  0% { fill: @lightest; }
+  50% { fill: @light-turquoise; }
+}
+@-webkit-keyframes breathing {
+  0% { fill: @lightest; }
+  50% { fill: @light-turquoise; }
+}
+keyframes breathing {
+  0% { fill: @lightest; }
+  50% { fill: @light-turquoise; }
+}
+
 body {
   margin: 0;
 }
@@ -48,9 +77,24 @@ span.nav {
 }
 
 .coffee-circle-ghost {
-  fill: none;
+  &.special {
+    .animated(breathing, 3s, linear, infinite);
+  }
+  cursor: default;
+  fill: @lightest;
   stroke-width: 1px;
   stroke: @light-gray;
+  transition: fill 0.5s ease-out;
+  &:hover {
+    .not-animated;
+    fill: @turquoise;
+  }
+}
+
+.coffee-circle-group {
+  text {
+    pointer-events: none;
+  }
 }
 
 .coffee-brand {

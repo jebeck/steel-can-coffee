@@ -54,6 +54,14 @@ module.exports = function(opts) {
     return shape[ranksToPosition[d.rank]].y;
   };
 
+  var specialClass = function(d) {
+    var specialClass = shape.specialPosition;
+    if (shape.ranksToPosition[d.rank] === specialClass) {
+      return true;
+    }
+    return false;
+  };
+
   function getCurrentPositions() {
     return _.map(currentRanks, function(r) {
       return ranksToPosition[r];
@@ -120,7 +128,10 @@ module.exports = function(opts) {
         cx: xPosition,
         cy: yPosition,
         r: 0,
-        'class': 'coffee-circle-ghost'
+        'class': function(d) {
+          var special = specialClass(d) ? 'special' : '';
+          return 'coffee-circle-ghost ' + special;
+        }
       });
 
     // animate expansion of large circles to full radius
@@ -196,6 +207,10 @@ module.exports = function(opts) {
         cx: xPosition,
         cy: yPosition
       });
+
+    // update special class for near-to-focus circle
+    circles.selectAll('.coffee-circle-ghost')
+      .classed('special', specialClass);
 
     // update paths for text in circle
     paths.transition()

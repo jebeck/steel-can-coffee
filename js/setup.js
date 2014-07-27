@@ -83,7 +83,8 @@ module.exports = function() {
           4: 'leftBottom',
           5: 'leftMid'
         },
-        pathGenerator: this.pathGeneratorFn(textR)
+        pathGenerator: this.pathGeneratorFn(textR),
+        specialPosition: 'top'
       };
     };
 
@@ -117,7 +118,8 @@ module.exports = function() {
           4: 'midBottom',
           5: 'bottom'
         },
-        pathGenerator: this.pathGeneratorFn(0.95 * (0.45 * this.h/5))
+        pathGenerator: this.pathGeneratorFn(0.95 * (0.45 * this.h/5)),
+        specialPosition: 'side'
       };
     };
 
@@ -153,7 +155,8 @@ module.exports = function() {
           4: 'bottomLeft',
           5: 'bottom'
         },
-        pathGenerator: this.pathGeneratorFn(0.95 * r)
+        pathGenerator: this.pathGeneratorFn(0.95 * r),
+        specialPosition: 'top'
       };
     };
 
@@ -189,7 +192,8 @@ module.exports = function() {
           4: 'bottomRight',
           5: 'topRight'
         },
-        pathGenerator: this.pathGeneratorFn(0.95 * r)
+        pathGenerator: this.pathGeneratorFn(0.95 * r),
+        specialPosition: 'topLeft'
       };
     };
 
