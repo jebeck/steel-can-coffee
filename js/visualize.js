@@ -1,6 +1,8 @@
 var _ = require('lodash');
 var d3 = require('d3');
 
+var hastouch = require('./hastouch');
+
 module.exports = function(opts) {
   opts = opts || {};
 
@@ -28,11 +30,24 @@ module.exports = function(opts) {
       aspectRatio = dimensions.width/dimensions.height;
     }
 
-    if (dimensions && dimensions.width <= 320) {
+    var w = window.innerWidth, h = window.innerHeight;
+    if (w <= 320) {
+      if (!dimensions) {
+        dimensions = {
+          width: w,
+          height: h
+        };
+      }
       shape = shapes.threeTwoVertical(dimensions);
       ranksToPosition = shape.ranksToPosition;
     }
-    else if (dimensions && dimensions.height <= 320) {
+    else if (h <= 320) {
+      if (!dimensions) {
+        dimensions = {
+          width: w,
+          height: h
+        };
+      }
       shape = shapes.threeTwoHorizontal(dimensions);
       ranksToPosition = shape.ranksToPosition;
     }
@@ -127,11 +142,12 @@ module.exports = function(opts) {
       .attr({
         cx: xPosition,
         cy: yPosition,
-        r: 0,
-        'class': function(d) {
-          var special = specialClass(d) ? 'special' : '';
-          return 'coffee-circle-ghost ' + special;
-        }
+        r: 0
+      })
+      .classed({
+        'coffee-circle-ghost': true,
+        'special': specialClass,
+        'no-touch': !hastouch()
       });
 
     // animate expansion of large circles to full radius

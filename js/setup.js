@@ -124,28 +124,28 @@ module.exports = function() {
     };
 
     this.threeTwoVertical = function(dimensions) {
-      var margin = 10, width = dimensions.width, height = dimensions.height;
-      var r = (width - 2 * margin)/4;
+      var margin = 10;
+      var r = (this.w - 2 * margin)/4.25;
       return {
         top: {
           x: r + margin,
           y: r + margin
         },
         topLeft: {
-          x: width - margin - r,
-          y: ((height/2 - (r + margin))/2) + r + margin
+          x: this.w - margin - r,
+          y: ((this.h/2 - (r + margin))/2) + r + margin
         },
         rightMid: {
           x: r + margin,
-          y: height/2
+          y: this.h/2
         },
         bottomLeft: {
-          x: width - margin - r,
-          y: (((height - margin - r) - (height/2))/2) + height/2
+          x: this.w - margin - r,
+          y: (((this.h - margin - r) - (this.h/2))/2) + this.h/2
         },
         bottom: {
           x: r + margin,
-          y: height - margin - r
+          y: this.h - margin - r
         },
         radius: r,
         ranksToPosition: {
@@ -161,27 +161,27 @@ module.exports = function() {
     };
 
     this.threeTwoHorizontal = function(dimensions) {
-      var margin = 10, width = dimensions.width, height = dimensions.height;
-      var r = (height - 2* margin)/4;
+      var margin = 10;
+      var r = (this.h - 2* margin)/4;
       return {
         topLeft: {
           x: margin + r,
           y: margin + r
         },
         bottomLeft: {
-          x: width/2 - (((width/2) - (margin + r))/2),
-          y: height - margin - r
+          x: this.w/2 - (((this.w/2) - (margin + r))/2),
+          y: this.h - margin - r
         },
         topMid: {
-          x: width/2,
+          x: this.w/2,
           y: margin + r
         },
         bottomRight: {
-          x: width/2 + (((width - margin - r) - (width/2))/2),
-          y: height - margin - r
+          x: this.w/2 + (((this.w - margin - r) - (this.w/2))/2),
+          y: this.h - margin - r
         },
         topRight: {
-          x: width - margin - r,
+          x: this.w - margin - r,
           y: margin + r
         },
         radius: r,
