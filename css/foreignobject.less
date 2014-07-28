@@ -1,0 +1,89 @@
+.flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@-moz-keyframes fadein {
+  from { opacity: 0.0; }
+  to { opacity: 1.0; }
+}
+@-webkit-keyframes fadein {
+  from { opacity: 0.0; }
+  to { opacity: 1.0; }
+}
+@keyframes fadein {
+  from { opacity: 0.0; }
+  to { opacity: 1.0; }
+}
+
+@-moz-keyframes fadeout {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+@-webkit-keyframes fadeout {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+@keyframes fadeout {
+  from { opacity: 1.0; }
+  to { opacity: 0.0; }
+}
+
+.fo-main {
+  span.close {
+    color: @light-gray;
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+    padding: 10px;
+  }
+  .animated(fadein, 1s, ease-in-out, 0s);
+  &.exiting {
+    .animated(fadeout, 1s, ease-in-out, 0s);
+  }
+  background-color: @dark;
+  border-radius: 21px;
+  .flex-facts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .fact {
+    background-color: @lightest;
+    border: 10px solid @dark;
+    border-radius: 21px;
+    padding: 5px 25px 15px 10px;
+    h2 {
+      color: @darkest;
+      margin: 10px 0px;
+      font-family: 'Lobster', cursive;
+      i {
+        color: lighten(@darkest, 10%);
+      }
+    }
+    p {
+      font-family: 'PT Sans Caption', sans-serif;
+      ul {
+        list-style-type: none;
+        li span {
+          border-radius: 7px;
+          background-color: lighten(@light-turquoise, 60%);
+          color: @turquoise;
+          display: inline-block;
+          margin: 5px 0px;
+          padding: 7px;
+        }
+      }
+      &.quotation {
+        color: @dark-gray;
+        font-size: 120%;
+        font-style: italic;
+        padding-left: 40px;
+      }
+    }
+  }
+}
+

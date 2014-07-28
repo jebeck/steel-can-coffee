@@ -1,5 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans+Caption);
 @import 'colors.less';
+@import 'foreignobject.less';
 @import 'icons.less';
 
 .not-animated(@zero: 0) {
@@ -26,9 +28,16 @@
   0% { fill: @lightest; }
   50% { fill: @light-turquoise; }
 }
-keyframes breathing {
+@keyframes breathing {
   0% { fill: @lightest; }
   50% { fill: @light-turquoise; }
+}
+
+// general rules
+span i {
+  &:hover, &:active, &:focus {
+    color: @medium-gray;
+  }
 }
 
 body {
@@ -43,10 +52,13 @@ body {
 
 span.nav {
   background-color: '#CCCCCC';
-  color: white;
+  color: @light-gray;
   cursor: pointer;
   font-size: 32px;
   position: fixed;
+  &.hidden {
+    display: none;
+  }
   @media (min-width: 320px) and (min-height: 320px) {
     top: 15vh;
     &.back {
@@ -72,15 +84,18 @@ span.nav {
   opacity: 0.10;
 }
 
+.coffee-circle-group.special {
+  .coffee-circle-ghost {
+    .animated(breathing, 3s, linear, infinite);
+  }
+}
+
 .coffee-circle {
   fill: @lightest;
   stroke: @light;
 }
 
 .coffee-circle-ghost {
-  &.special {
-    .animated(breathing, 3s, linear, infinite);
-  }
   cursor: default;
   fill: @lightest;
   stroke-width: 1px;
@@ -90,6 +105,10 @@ span.nav {
     .not-animated;
     fill: @turquoise;
   }
+}
+
+.coffee-circle-focus {
+  fill: @turquoise;
 }
 
 .coffee-circle-group {

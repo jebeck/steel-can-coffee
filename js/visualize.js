@@ -5,20 +5,18 @@ var hastouch = require('./hastouch');
 
 module.exports = function(opts) {
   opts = opts || {};
+  var defaults = {
+    duration: 1000,
+    focusRadiusRatio: 1.5
+  };
+
+  _.defaults(opts, defaults);
+  var viz = {};
 
   var shape, ranksToPosition, paths, currentRanks = [1,2,3,4,5];
+  viz.focused = null;
   // initialize shape and ranksToPosition
   updateShape();
-
-  // make a group for each coffee brand
-  var circles = opts.selection.selectAll('g')
-    .data(opts.data)
-    .enter()
-    .append('g')
-    .attr({
-      id: function(d) { return d.brand.replace(' ', '_'); },
-      'class': 'coffee-circle-group'
-    });
 
   function updateShape(dimensions) {
     var shapes = new opts.Shapes(), aspectRatio;
@@ -59,19 +57,26 @@ module.exports = function(opts) {
       shape = shapes.vertical();
       ranksToPosition = shape.ranksToPosition;
     }
+    viz.shape = shape;
   }
 
   var xPosition = function(d) {
+    if (d.rank === viz.focused) {
+      return shape[ranksToPosition[d.rank]].focused.x;
+    }
     return shape[ranksToPosition[d.rank]].x;
   };
 
   var yPosition = function(d) {
+    if (d.rank === viz.focused) {
+      return shape[ranksToPosition[d.rank]].focused.y;
+    }
     return shape[ranksToPosition[d.rank]].y;
   };
 
-  var specialClass = function(d) {
-    var specialClass = shape.specialPosition;
-    if (shape.ranksToPosition[d.rank] === specialClass) {
+  var isSpecial = function(d) {
+    var isSpecial = shape.specialPosition;
+    if (ranksToPosition[d.rank] === isSpecial) {
       return true;
     }
     return false;
@@ -96,7 +101,8 @@ module.exports = function(opts) {
     });
   }
 
-  this.cycleBackwards = function() {
+  viz.cycleBackwards = function(duration) {
+    duration = duration || opts.duration;
     var currentPositions = getCurrentPositions();
 
     var first = currentRanks[0];
@@ -105,10 +111,11 @@ module.exports = function(opts) {
 
     updateRanksToPosition(currentPositions);
 
-    this.updatePosition(1000);
+    viz.updatePosition(duration);
   };
 
-  this.cycleForwards = function() {
+  viz.cycleForwards = function(duration) {
+    duration = duration || opts.duration;
     var currentPositions = getCurrentPositions();
 
     var last = currentRanks[4];
@@ -117,10 +124,23 @@ module.exports = function(opts) {
 
     updateRanksToPosition(currentPositions);
 
-    this.updatePosition(1000);
+    viz.updatePosition(duration);
   };
 
-  this.draw = function() {
+  // make a group for each coffee brand
+  var circles = opts.selection.selectAll('g')
+    .data(opts.data)
+    .enter()
+    .append('g')
+    .attr({
+      id: function(d) { return d.brand.replace(' ', '_'); }
+    })
+    .classed({
+      'coffee-circle-group': true,
+      'special': isSpecial
+    });
+
+  viz.draw = function() {
     // define paths for text in circles
     paths = d3.select('defs')
       .selectAll('path')
@@ -153,7 +173,6 @@ module.exports = function(opts) {
       })
       .classed({
         'coffee-circle-ghost': true,
-        'special': specialClass,
         'no-touch': !hastouch()
       });
 
@@ -195,13 +214,25 @@ module.exports = function(opts) {
       })
       .text(function(d) { return d.rank; });
 
-    return this;
+    return viz;
   };
 
-  this.update = function(dimensions) {
-    updateShape(dimensions);
+  viz.update = function(dimensions) {
+    var duration;
+    if (!arguments.length) {
+      updateShape();
+      duration = opts.duration/2;
+    }
+    else {
+      updateShape(dimensions);
+      duration = 0;
+    }
     preserveRanksToPosition();
-    this.updatePosition(0);
+    viz.updatePosition(duration);
+
+    // update radius of focus circle, if exists
+    circles.selectAll('.coffee-circle-focus')
+      .attr('r', shape.radius * opts.focusRadiusRatio);
 
     // update radius of large circles
     circles.selectAll('.coffee-circle')
@@ -217,9 +248,20 @@ module.exports = function(opts) {
         'font-size': (0.4 * shape.radius),
         startOffset: '33%'
       });
+
+    if (viz.focused) {
+      var fo = shape.foreignObject;
+      d3.select('#thisIsTheForeignObject')
+        .attr({
+          width: fo.width,
+          height: fo.height,
+          x: fo.x,
+          y: fo.y(d3.select('.fo-main')[0][0].getBoundingClientRect().height)
+        });      
+    }
   };
 
-  this.updatePosition = function(duration) {
+  viz.updatePosition = function(duration) {
     // update position of large and small circles
     circles.selectAll('circle')
       .transition()
@@ -229,18 +271,19 @@ module.exports = function(opts) {
         cy: yPosition
       });
 
-    // update special class for near-to-focus circle
-    circles.selectAll('.coffee-circle-ghost')
-      .classed('special', specialClass);
+    // update special class for near-to-focused circle
+    if (!viz.focused) {
+      circles.classed('special', isSpecial);
+    }
 
     // update paths for text in circle
     paths.transition()
       .duration(duration)
       .attr({
-      d: function(d) {
-        var path = shape.pathGenerator(xPosition(d), yPosition(d));
-        return path.m + path.a;
-      }
+        d: function(d) {
+          var path = shape.pathGenerator(xPosition(d), yPosition(d));
+          return path.m + path.a;
+        }
     });
 
     // update position of coffee rank text
@@ -254,5 +297,122 @@ module.exports = function(opts) {
       });
   };
 
-  return this;
+  function updatePathAndText(focused, wasFocused, duration) {
+    duration = duration || opts.duration;
+    // update path for text in circle
+    paths.filter(function(d) {
+      if (d.rank === viz.focused || d.rank === wasFocused) {
+        return d;
+      }
+    })
+      .transition()
+      .duration(opts.duration)
+      .attr({
+        d: function(d) {
+          var path = shape.pathGenerator(xPosition(d), yPosition(d));
+          return path.m + path.a;
+        }
+    });
+
+    // update position of coffee rank text
+    focused.selectAll('.coffee-rank')
+      .transition()
+      .duration(opts.duration)
+      .attr({
+        'font-size': (1.4 * shape.radius),
+        x: xPosition,
+        y: yPosition
+      });
+  }
+
+  viz.drawFocus = function() {
+    var focused = circles.filter(function(d) {
+      if (isSpecial(d)) {
+        return d;
+      }
+    });
+
+    // add a third larger 'focus' circle
+    focused.insert('circle', '.coffee-circle')
+      .attr({
+        cx: xPosition,
+        cy: yPosition,
+        r: 0,
+        'class': 'coffee-circle-focus'
+      });
+
+    // update position of all circles
+    focused.selectAll('circle')
+      .transition()
+      .duration(opts.duration)
+      .attr({
+        cx: xPosition,
+        cy: yPosition
+      });
+
+    // animate the introduction of the 'focus' circle
+    focused.select('.coffee-circle-focus')
+      .transition()
+      .duration(opts.duration)
+      .attr({
+        r: focused.select('.coffee-circle').attr('r') * opts.focusRadiusRatio
+      });
+
+    updatePathAndText(focused);
+
+    var unfocused = circles.filter(function(d) {
+      if (!isSpecial(d)) {
+        return d;
+      }
+    });
+
+    // animate the exit of the unfocused circles
+    unfocused.selectAll('circle')
+      .transition()
+      .duration(opts.duration/2)
+      .attr({
+        r: 0,
+        opacity: 0.0
+      });
+
+    // animate the exit of the text in the unfocused circles
+    unfocused.selectAll('text')
+      .transition()
+      .duration(opts.duration/2)
+      .attr({
+        opacity: 0.0
+      });
+  };
+
+  viz.undrawFocus = function() {
+    d3.select('.fo-main').classed('exiting', true);
+    var wasFocused = circles.filter(function(d) { if (isSpecial(d)) { return d; } });
+    var oldFocus = viz.focused;
+    viz.focused = null;
+    updatePathAndText(wasFocused, oldFocus, opts.duration/2);
+
+    viz.update();
+
+    setTimeout(function() {
+      d3.select('#thisIsTheForeignObject').remove();
+      // can't transition here because multiple transition on same node not allowed
+      d3.select('.coffee-circle-focus').remove();
+
+      circles.selectAll('circle')
+        .transition()
+        .duration(opts.duration/2)
+        .attr({
+          'opacity': 1.0
+        });
+      circles.selectAll('text')
+        .transition()
+        .duration(opts.duration/2)
+        .attr({
+          'opacity': 1.0
+        });
+      d3.selectAll('span.nav').classed('hidden', false);
+    }, 500);
+  };
+
+  return viz;
 };

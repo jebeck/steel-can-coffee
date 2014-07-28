@@ -6,15 +6,16 @@ module.exports = function() {
   // set up SVG dimensions according to standard D3 margin convention
   var w = parent.offsetWidth;
   var h = parent.offsetHeight;
+  var commonMargin = 10;
   var margin = {
-    top: 10,
-    bottom: 10,
-    left: 10,
-    right: 10
+    top: commonMargin,
+    bottom: commonMargin,
+    left: commonMargin,
+    right: commonMargin
   };
   var width = w - margin.left - margin.right;
   var height = h - margin.top - margin.bottom;
-  var dimensions = {width: width, height: height};
+  var dimensions = {w: w, h: h, width: width, height: height};
 
   // append the main SVG element and group
   var svg = d3.select('#main')
@@ -39,6 +40,7 @@ module.exports = function() {
   var Shapes = function() {
     this.w = dimensions.width;
     this.h = dimensions.height;
+    var that = this;
 
     this.pathGeneratorFn = function(radius) {
       return function(x, y) {
@@ -53,11 +55,16 @@ module.exports = function() {
       var bigR = (0.95 * this.h)/2.9;
       var littleR = (0.95 * bigR)/2;
       var textR = 0.95 * littleR;
+      var margin = commonMargin;
 
       return {
         top: {
           x: (this.w/2),
-          y: this.h - (bigR + (this.h/2))
+          y: this.h - (bigR + (this.h/2)),
+          focused: {
+            x: this.w/4,
+            y: this.h/2
+          }
         },
         leftMid: {
           x: -(Math.sin((2*Math.PI)/5) * bigR) + (this.w/2),
@@ -84,7 +91,13 @@ module.exports = function() {
           5: 'leftMid'
         },
         pathGenerator: this.pathGeneratorFn(textR),
-        specialPosition: 'top'
+        specialPosition: 'top',
+        foreignObject: {
+          width: this.w/2,
+          height: this.h,
+          x: this.w/2 - littleR/2,
+          y: function(realHeight) { return that.h/2 + commonMargin - realHeight/2; }
+        }
       };
     };
 
@@ -110,7 +123,7 @@ module.exports = function() {
           x: this.w/4,
           y: this.h/2
         },
-        radius: 0.45 * this.h/5,
+        radius: 0.55 * this.h/5,
         ranksToPosition: {
           1: 'side',
           2: 'top',
@@ -118,13 +131,13 @@ module.exports = function() {
           4: 'midBottom',
           5: 'bottom'
         },
-        pathGenerator: this.pathGeneratorFn(0.95 * (0.45 * this.h/5)),
+        pathGenerator: this.pathGeneratorFn(0.95 * (0.55 * this.h/5)),
         specialPosition: 'side'
       };
     };
 
     this.threeTwoVertical = function(dimensions) {
-      var margin = 10;
+      var margin = commonMargin;
       var r = (this.w - 2 * margin)/4.25;
       return {
         top: {
@@ -161,7 +174,7 @@ module.exports = function() {
     };
 
     this.threeTwoHorizontal = function(dimensions) {
-      var margin = 10;
+      var margin = commonMargin;
       var r = (this.h - 2* margin)/4;
       return {
         topLeft: {
