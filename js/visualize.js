@@ -83,6 +83,13 @@ module.exports = function(opts) {
     });
   }
 
+  function preserveRanksToPosition() {
+    var oldRanksToPosition = _.clone(ranksToPosition);
+    _.map(currentRanks, function(r, i) {
+      ranksToPosition[r] = oldRanksToPosition[i + 1];
+    });
+  }
+
   function updateRanksToPosition(currentPositions) {
     _.map(currentRanks, function(r, i) {
       ranksToPosition[r] = currentPositions[i];
@@ -193,9 +200,7 @@ module.exports = function(opts) {
 
   this.update = function(dimensions) {
     updateShape(dimensions);
-    // TODO: query if aspect ratio changed significantly (i.e., requiring redraw)
-    // and if not, return early!
-
+    preserveRanksToPosition();
     this.updatePosition(0);
 
     // update radius of large circles
