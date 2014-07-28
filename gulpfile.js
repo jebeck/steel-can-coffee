@@ -1,9 +1,13 @@
+var _ = require('lodash');
 var connect = require('gulp-connect');
 var gulp = require('gulp');
 var less = require('gulp-less');
+var os = require('os');
 var path = require('path');
 var rename = require('gulp-rename');
 var watchify = require('gulp-watchify');
+
+var ifaces = os.networkInterfaces();
 
 var paths = {
   src: ['js/main.js'],
@@ -32,6 +36,7 @@ gulp.task('watch', function() {
 
 gulp.task('server', function() {
   connect.server({
+    host: _.findWhere(ifaces.en0, {family: 'IPv4'}).address,
     livereload: true,
     port: 8081
   });
