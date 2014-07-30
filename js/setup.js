@@ -103,25 +103,29 @@ module.exports = function() {
 
     this.vertical = function() {
       return {
-        top: {
-          x: 3 * this.w/4,
-          y: this.h/8
-        },
-        midTop: {
-          x: 3 * this.w/4,
-          y: 3 * this.h/8
-        },
-        midBottom: {
-          x: 3 * this.w/4,
-          y: 5 * this.h/8
+        side: {
+          x: this.w/4,
+          y: this.h/2,
+          focused: {
+            x: this.w/2,
+            y: this.h/5
+          }
         },
         bottom: {
           x: 3 * this.w/4,
           y: 7 * this.h/8
         },
-        side: {
-          x: this.w/4,
-          y: this.h/2
+        midBottom: {
+          x: 3 * this.w/4,
+          y: 5 * this.h/8
+        },
+        midTop: {
+          x: 3 * this.w/4,
+          y: 3 * this.h/8
+        },
+        top: {
+          x: 3 * this.w/4,
+          y: this.h/8
         },
         radius: 0.55 * this.h/5,
         ranksToPosition: {
@@ -132,7 +136,20 @@ module.exports = function() {
           5: 'bottom'
         },
         pathGenerator: this.pathGeneratorFn(0.95 * (0.55 * this.h/5)),
-        specialPosition: 'side'
+        specialPosition: 'side',
+        foreignObject: {
+          width: 0.9 * this.w,
+          height: this.h - 2 * this.h/5,
+          x: 0.05 * this.w,
+          y: function(realHeight) {
+            if (realHeight > that.h/2) {
+              return that.h/5 * 2 + commonMargin;
+            }
+            else {
+              return that.h/2;
+            }
+          }
+        }
       };
     };
 
