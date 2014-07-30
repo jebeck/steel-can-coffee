@@ -33,6 +33,12 @@
 }
 
 .fo-main {
+  @media (max-width: 767px) {
+    font-size: 70%;
+  }
+  @media (max-width: 800px) and (min-aspect-ratio: 95/100) {
+    font-size: 75%;
+  }
   span.close {
     color: @light-gray;
     cursor: pointer;
@@ -52,6 +58,9 @@
     justify-content: center;
   }
   .fact {
+    @media (min-aspect-ratio: 95/100) and (max-width: 1250px) {
+      flex-grow: 1;
+    }
     background-color: @lightest;
     border: 10px solid @dark;
     border-radius: 21px;
