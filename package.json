@@ -2,6 +2,7 @@
   "name": "steel-can-coffee",
   "version": "0.0.0",
   "description": "\"visualization of data from this Thrillist article: http://www.thrillist.com/drink/nation/what-s-the-best-grocery-store-coffee-folgers-chock-full-onuts\"",
+  "repository": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,17 +16,19 @@
   "author": "Jana E. Beck",
   "license": "GPLv3",
   "dependencies": {
-    "d3": "~3.4.8",
-    "hammerjs": "~2.0.2",
-    "lodash": "~2.4.1",
-    "viewport-units-buggyfill": "~0.3.1"
+    "d3": "^3.4.11",
+    "fastclick": "^1.0.3",
+    "hammerjs": "^2.0.2",
+    "lodash": "^2.4.1",
+    "viewport-units-buggyfill": "^0.3.1"
   },
   "devDependencies": {
-    "gulp": "~3.8.5",
-    "gulp-connect": "~2.0.5",
-    "gulp-less": "~1.3.1",
-    "gulp-rename": "~1.2.0",
-    "gulp-watchify": "~0.2.0",
-    "path": "~0.4.9"
+    "gulp": "^3.8.7",
+    "gulp-autoprefixer": "0.0.10",
+    "gulp-connect": "^2.0.6",
+    "gulp-less": "^1.3.5",
+    "gulp-rename": "^1.2.0",
+    "gulp-watchify": "^0.2.0",
+    "watchify": "^0.6.1"
   }
 }

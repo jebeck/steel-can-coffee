@@ -1,32 +1,8 @@
-.flex {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-}
-
-@-moz-keyframes fadein {
-  from { opacity: 0.0; }
-  to { opacity: 1.0; }
-}
-@-webkit-keyframes fadein {
-  from { opacity: 0.0; }
-  to { opacity: 1.0; }
-}
 @keyframes fadein {
   from { opacity: 0.0; }
   to { opacity: 1.0; }
 }
 
-@-moz-keyframes fadeout {
-  from { opacity: 1.0; }
-  to { opacity: 0.0; }
-}
-@-webkit-keyframes fadeout {
-  from { opacity: 1.0; }
-  to { opacity: 0.0; }
-}
 @keyframes fadeout {
   from { opacity: 1.0; }
   to { opacity: 0.0; }
@@ -41,10 +17,10 @@
   }
   span.close {
     color: @light-gray;
-    cursor: pointer;
+    .link;
     float: right;
     font-size: 20px;
-    padding: 10px;
+    padding: 10px 10px 10px 0px;
   }
   .animated(fadein, 1s, ease-in-out, 0s);
   &.exiting {
@@ -53,7 +29,7 @@
   background-color: @dark;
   border-radius: 21px;
   .flex-facts {
-    display: flex;
+    .flex;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -74,7 +50,7 @@
       }
     }
     p {
-      font-family: 'PT Sans Caption', sans-serif;
+      font-family: 'Ubuntu', sans-serif;
       ul {
         list-style-type: none;
         li span {
@@ -90,9 +66,9 @@
         color: @dark-gray;
         font-size: 120%;
         font-style: italic;
+        line-height: 125%;
         padding-left: 40px;
       }
     }
   }
 }
-

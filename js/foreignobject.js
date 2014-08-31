@@ -41,41 +41,43 @@ module.exports = function(opts) {
     }
   } 
 
-  var main = opts.selection.append('g')
-    .attr({
-      id: 'foreignObjectGroup'
-    })
-    .append('foreignObject')
-    .attr({
-      id: foId,
-      width: fo.width,
-      height: fo.height,
-      x: fo.x,
-      y: fo.y(fo.height)
-    })
-    .append('xhtml:div')
-    .attr('class', 'fo-main');
+  if (fo) {
+    var main = opts.selection.append('g')
+      .attr({
+        id: 'foreignObjectGroup'
+      })
+      .append('foreignObject')
+      .attr({
+        id: foId,
+        width: fo.width,
+        height: fo.height,
+        x: fo.x,
+        y: fo.y(fo.height)
+      })
+      .append('xhtml:div')
+      .attr('class', 'fo-main');
 
-  main.append('span')
-    .attr('class', 'close')
-    .on('click', opts.handleClose)
-    .html('<i class="icon-close"></i>');
+    main.append('span')
+      .attr('class', 'close')
+      .on('click', opts.handleClose)
+      .html('<i class="icon-close"></i>');
 
-  var flex = main.append('div').attr('class', 'flex-facts');
+    var flex = main.append('div').attr('class', 'flex-facts');
 
-  // add an <h2> and <p> for each fact
-  _.each(facts, function(fact) {
-    var thisFact = opts.d[fact], factSel;
-    if (typeof thisFact === 'object') {
-      factSel = flex.append('div').attr('class', 'fact');
-    }
-    else {
-      factSel = main.append('div').attr('class', 'fact');
-    }
-    addFact(fact, thisFact, factSel);
-  });
+    // add an <h2> and <p> for each fact
+    _.each(facts, function(fact) {
+      var thisFact = opts.d[fact], factSel;
+      if (typeof thisFact === 'object') {
+        factSel = flex.append('div').attr('class', 'fact');
+      }
+      else {
+        factSel = main.append('div').attr('class', 'fact');
+      }
+      addFact(fact, thisFact, factSel);
+    });
 
-  // find the height of the resulting div to determine y-placement of foreignObject
-  var height = main[0][0].getBoundingClientRect().height;
-  opts.selection.select('#' + foId).attr('y', fo.y(height));
+    // find the height of the resulting div to determine y-placement of foreignObject
+    var height = main[0][0].getBoundingClientRect().height;
+    opts.selection.select('#' + foId).attr('y', fo.y(height));
+  }
 };

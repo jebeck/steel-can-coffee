@@ -29,7 +29,7 @@ module.exports = function(opts) {
     }
 
     var w = window.innerWidth, h = window.innerHeight;
-    if (w <= 320) {
+    if (w <= 360) {
       if (!dimensions) {
         dimensions = {
           width: w,
@@ -39,7 +39,7 @@ module.exports = function(opts) {
       shape = shapes.threeTwoVertical(dimensions);
       ranksToPosition = shape.ranksToPosition;
     }
-    else if (h <= 320) {
+    else if (h <= 360) {
       if (!dimensions) {
         dimensions = {
           width: w,
@@ -137,7 +137,8 @@ module.exports = function(opts) {
     })
     .classed({
       'coffee-circle-group': true,
-      'special': isSpecial
+      'special': isSpecial,
+      'link': true
     });
 
   viz.draw = function() {
@@ -332,6 +333,9 @@ module.exports = function(opts) {
       }
     });
 
+    // remove pointer cursor when circle is focused
+    focused.classed('link', false);
+
     // add a third larger 'focus' circle
     focused.insert('circle', '.coffee-circle')
       .attr({
@@ -387,6 +391,8 @@ module.exports = function(opts) {
   viz.undrawFocus = function() {
     d3.select('.fo-main').classed('exiting', true);
     var wasFocused = circles.filter(function(d) { if (isSpecial(d)) { return d; } });
+    // add back pointer cursor
+    wasFocused.classed('link', true);
     var oldFocus = viz.focused;
     viz.focused = null;
     updatePathAndText(wasFocused, oldFocus, opts.duration/2);

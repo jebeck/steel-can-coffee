@@ -159,7 +159,11 @@ module.exports = function() {
       return {
         top: {
           x: r + margin,
-          y: r + margin
+          y: r + margin,
+          focused: {
+            x: this.w/2,
+            y: this.h/2
+          }
         },
         topLeft: {
           x: this.w - margin - r,
@@ -196,7 +200,11 @@ module.exports = function() {
       return {
         topLeft: {
           x: margin + r,
-          y: margin + r
+          y: margin + r,
+          focused: {
+            x: this.w/2,
+            y: this.h/2
+          }
         },
         bottomLeft: {
           x: this.w/2 - (((this.w/2) - (margin + r))/2),
