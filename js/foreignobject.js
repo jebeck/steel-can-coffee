@@ -3,6 +3,11 @@ var d3 = require('d3');
 
 module.exports = function(opts) {
   opts = opts || {};
+  var defaults = {
+    duration: 500
+  };
+  _.defaults(opts, defaults);
+
   var shape = opts.shape;
   var fo = shape.foreignObject;
 
@@ -79,5 +84,37 @@ module.exports = function(opts) {
     // find the height of the resulting div to determine y-placement of foreignObject
     var height = main[0][0].getBoundingClientRect().height;
     opts.selection.select('#' + foId).attr('y', fo.y(height));
+  }
+
+  else {
+    var mainDiv = d3.select('body').append('div');
+
+
+    mainDiv.append('h1')
+      .html('<span class="rank">#' + opts.d.rank + '  </span>' + opts.d.brand);
+
+    mainDiv.append('br');
+
+    // add an <h2> and <p> for each fact
+    _.each(facts, function(fact) {
+      var thisFact = opts.d[fact], factSel;
+      addFact(fact, thisFact, mainDiv);
+    });
+
+    mainDiv.append('p')
+      .attr('class', 'close')
+      .html('(Tap anywhere to close.)');
+
+    mainDiv.on('click', function() {
+      mainDiv.remove();
+      opts.handleClose();
+    });
+
+    mainDiv.transition()
+      .delay(opts.duration*2)
+      .duration(opts.duration*1.5)
+      .attr('class', 'main-mobile')
+      .style('height', '90vh')
+      .style('padding', '4vh 4vw');
   }
 };
