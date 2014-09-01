@@ -109,12 +109,14 @@ var coffee = require('./index');
       };
       // because arrow keys, Esc (keyCode 27) don't register onkeypress
       document.onkeydown = function(e) {
-        if (e.keyIdentifier === 'Right' || (e.keyCode === 9 && !e.shiftKey)) {
+        // right is keyCode 39
+        if (e.keyCode === 39 || (e.keyCode === 9 && !e.shiftKey)) {
           // preventDefault to stop tab (keyCode 9) from moving active focus to address bar
           e.preventDefault();
           handleBack();
         }
-        else if (e.keyIdentifier === 'Left' || (e.keyCode === 9 && e.shiftKey)) {
+        // left is keyCode 37
+        else if (e.keyCode === 37 || (e.keyCode === 9 && e.shiftKey)) {
           // preventDefault to stop tab (keyCode 9) from moving active focus to address bar
           e.preventDefault();
           handleForwards();
