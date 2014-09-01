@@ -1,0 +1,476 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic);
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0.0;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0.0;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1.0;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1.0;
+  }
+  to {
+    opacity: 0.0;
+  }
+}
+.fo-main {
+  -webkit-animation: fadein 1s ease-in-out 0s;
+          animation: fadein 1s ease-in-out 0s;
+  background-color: #592717;
+  border-radius: 21px;
+}
+@media (max-width: 767px) {
+  .fo-main {
+    font-size: 70%;
+  }
+}
+@media (max-width: 800px) and (min-aspect-ratio: 95/100) {
+  .fo-main {
+    font-size: 75%;
+  }
+}
+.fo-main span.close {
+  color: #ececec;
+  cursor: pointer;
+  float: right;
+  font-size: 20px;
+  padding: 10px 10px 10px 0px;
+}
+.fo-main.exiting {
+  -webkit-animation: fadeout 1s ease-in-out 0s;
+          animation: fadeout 1s ease-in-out 0s;
+}
+.fo-main .flex-facts {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.fo-main .fact {
+  background-color: #bb9e8c;
+  border: 10px solid #592717;
+  border-radius: 21px;
+  padding: 5px 25px 15px 10px;
+}
+@media (min-aspect-ratio: 95/100) and (max-width: 1250px) {
+  .fo-main .fact {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+  }
+}
+.fo-main .fact h2 {
+  color: #3f1e0d;
+  margin: 10px 0px;
+  font-family: 'Lobster', cursive;
+}
+.fo-main .fact h2 i {
+  color: #693216;
+}
+.fo-main .fact p {
+  font-family: 'Ubuntu', sans-serif;
+}
+.fo-main .fact p ul {
+  list-style-type: none;
+}
+.fo-main .fact p ul li span {
+  border-radius: 7px;
+  background-color: #bffffb;
+  color: #0d3f3c;
+  display: inline-block;
+  margin: 5px 0px;
+  padding: 7px;
+}
+.fo-main .fact p.quotation {
+  color: #121212;
+  font-size: 120%;
+  font-style: italic;
+  line-height: 125%;
+  padding-left: 40px;
+}
+.main-mobile {
+  background-color: #bb9e8c;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 1vh;
+  left: 1vw;
+  width: 90vw;
+  margin: 0px auto;
+}
+@media (orientation: landscape) and (max-width: 640px) {
+  .main-mobile {
+    display: none;
+  }
+}
+.main-mobile#no-landscape {
+  padding: 2vh 4vw;
+  text-align: center;
+}
+@media (orientation: portrait), (orientation: landscape) and (min-width: 641px) {
+  .main-mobile#no-landscape {
+    display: none;
+  }
+}
+@media (orientation: landscape) and (max-width: 640px) {
+  .main-mobile#no-landscape {
+    display: block;
+  }
+}
+.main-mobile h1 {
+  color: #3f1e0d;
+  font-family: 'Lobster', cursive;
+  font-weight: 700;
+  font-size: 1.8em;
+  margin: 0;
+  white-space: pre;
+}
+.main-mobile h1 span {
+  color: #693216;
+}
+.main-mobile h2 {
+  color: #3f1e0d;
+  font-family: 'Lobster', cursive;
+  font-weight: 700;
+  font-size: 1.2em;
+  margin: 0;
+}
+.main-mobile h2 i {
+  color: #693216;
+}
+.main-mobile p {
+  color: #121212;
+  font-family: 'Ubuntu', sans-serif;
+  padding: 0px 10px;
+}
+.main-mobile p ul {
+  list-style-type: none;
+  margin: 0px;
+}
+.main-mobile p ul li span {
+  border-radius: 5px;
+  background-color: #bffffb;
+  color: #0d3f3c;
+  display: inline-block;
+  font-size: 0.9em;
+  margin: 2px 0px;
+  padding: 3px;
+}
+.main-mobile p.quotation {
+  font-size: 1.0em;
+}
+.main-mobile p.close {
+  color: #0d3f3c;
+  text-align: center;
+  font-size: 0.8em;
+}
+@font-face {
+  font-family: 'coffee-icons';
+  src: url('../font/coffee-icons.eot?16546477');
+  src: url('../font/coffee-icons.eot?16546477#iefix') format('embedded-opentype'), url('../font/coffee-icons.woff?16546477') format('woff'), url('../font/coffee-icons.ttf?16546477') format('truetype'), url('../font/coffee-icons.svg?16546477#coffee-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "coffee-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  opacity: .8;
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+.icon-left:before {
+  content: '\e800';
+}
+.icon-right:before {
+  content: '\e801';
+}
+.icon-quote:before {
+  content: '\e802';
+}
+.icon-home:before {
+  content: '\e803';
+}
+.icon-pencil:before {
+  content: '\e808';
+}
+.icon-close:before {
+  content: '\e809';
+}
+.icon-flavor:before {
+  content: '\e80a';
+}
+#intro {
+  background-color: #bb9e8c;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: fixed;
+  top: 1vh;
+  left: 1vw;
+  width: 90vw;
+  height: 90vh;
+  padding: 4vh 4vw;
+  margin: 0px;
+}
+#intro p {
+  color: #3f1e0d;
+  font-family: 'Ubuntu', sans-serif;
+  line-height: 150%;
+}
+@media (max-width: 640px) {
+  #intro p {
+    font-size: 0.8em;
+  }
+}
+@media (max-width: 899px) and (min-width: 641px) {
+  #intro p {
+    font-size: 1.1em;
+  }
+}
+@media (min-width: 900px) {
+  #intro p {
+    font-size: 2vw;
+  }
+}
+#intro p.lead {
+  font-weight: 700;
+}
+@media (max-width: 640px) {
+  #intro p.lead {
+    font-size: 1.05em;
+  }
+}
+@media (max-width: 899px) and (min-width: 641px) {
+  #intro p.lead {
+    font-size: 1.3em;
+  }
+}
+@media (min-width: 900px) {
+  #intro p.lead {
+    font-size: 2.75vw;
+  }
+}
+#intro p a {
+  color: #0d3f3c;
+}
+#intro p#close {
+  font-weight: 700;
+  color: #0d3f3c;
+  font-weight: normal;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  #intro p#close {
+    font-size: 1.05em;
+  }
+}
+@media (max-width: 899px) and (min-width: 641px) {
+  #intro p#close {
+    font-size: 1.3em;
+  }
+}
+@media (min-width: 900px) {
+  #intro p#close {
+    font-size: 2.75vw;
+  }
+}
+#intro p#close span#close-icon {
+  cursor: pointer;
+}
+#intro p#close span#close-icon i:hover,
+#intro p#close span#close-icon i:active,
+#intro p#close span#close-icon i:focus {
+  color: #a66232;
+}
+#intro p em {
+  font-style: italic;
+}
+@-webkit-keyframes breathing {
+  0% {
+    fill: #bb9e8c;
+  }
+  50% {
+    fill: #018b84;
+  }
+}
+@keyframes breathing {
+  0% {
+    fill: #bb9e8c;
+  }
+  50% {
+    fill: #018b84;
+  }
+}
+html.ua-mobile.ua-chrome .coffee-rank {
+  stroke-width: 0px;
+}
+.hidden {
+  display: none !important;
+}
+.flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+span i:hover,
+span i:active,
+span i:focus {
+  color: #acacac;
+}
+body {
+  margin: 0;
+}
+#main {
+  width: 100vw;
+  height: 100vh;
+  background-color: #3f1e0d;
+}
+span.nav {
+  background-color: '#CCCCCC';
+  color: #ececec;
+  cursor: pointer;
+  font-size: 32px;
+  position: fixed;
+}
+@media (min-width: 320px) and (min-height: 320px) {
+  span.nav {
+    top: 15vh;
+  }
+  span.nav.back {
+    left: 20vw;
+  }
+  span.nav.forward {
+    right: 20vw;
+  }
+}
+@media (max-width: 360px) and (orientation: portrait) {
+  span.nav {
+    display: none;
+  }
+}
+@media (max-height: 360px) and (orientation: landscape) {
+  span.nav {
+    display: none;
+  }
+}
+@media (max-aspect-ratio: 95/100) {
+  span.nav {
+    display: none;
+  }
+}
+.background-light {
+  fill: #ececec;
+  opacity: 0.10;
+}
+.link {
+  cursor: pointer;
+}
+.coffee-circle-group.special .coffee-circle-ghost {
+  -webkit-animation: breathing 3s linear infinite;
+          animation: breathing 3s linear infinite;
+}
+.coffee-circle {
+  fill: #bb9e8c;
+  stroke: #a28064;
+}
+.coffee-circle-ghost {
+  fill: #bb9e8c;
+  stroke-width: 1px;
+  stroke: #ececec;
+  transition: fill 0.5s ease-out;
+}
+.coffee-circle-ghost.no-touch:hover {
+  -webkit-animation: 0;
+          animation: 0;
+  fill: #0d3f3c;
+}
+.coffee-circle-focus {
+  fill: #0d3f3c;
+  stroke: #a28064;
+  stroke-width: 5px;
+}
+.coffee-circle-group text {
+  pointer-events: none;
+}
+.coffee-brand {
+  fill: #592717;
+  font-family: 'Lobster', cursive;
+  text-anchor: middle;
+}
+.coffee-rank {
+  dominant-baseline: central;
+  fill: #a66232;
+  font-family: 'Lobster', cursive;
+  stroke: #ececec;
+  stroke-width: 3px;
+  text-anchor: middle;
+}

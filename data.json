@@ -1,0 +1,37 @@
+[
+  {
+    "brand": "Maxwell House",
+    "aromas": ["wet dog", "burning"],
+    "flavors": ["fish oil", "despair"],
+    "quotation": "What death tastes like.",
+    "rank": 5
+  },
+  {
+    "brand": "Yuban",
+    "aromas": ["Snickers bar", "barn-y"],
+    "flavors": ["Mineral oil", "chocolate"],
+    "quotation": "This tastes better than it smells. It's a close call with Maxwell House, but this edged it out because I can actually swallow it.",
+    "rank": 4
+  },
+  {
+    "brand": "Folgers",
+    "aromas": ["unhappy children", "wet wool"],
+    "flavors": ["charred", "wet cardboard", "artificiality"],
+    "quotation": "It tastes as if someone sprayed coffee flavor onto coffee beans.",
+    "rank": 3
+  },
+  {
+    "brand": "Chock Full O'Nuts",
+    "aromas": ["burnt hair"],
+    "flavors": ["roasted Styrofoam", "gamey"],
+    "quotation": "It's savory, kind of like you're eating wild boar meat that's about to turn. That said, this isn't that bad. I wouldn't return it if I was eating in a Denny's.",
+    "rank": 2
+  },
+  {
+    "brand": "Community Coffee",
+    "aromas": ["chocolate", "honey", "wet paper"],
+    "flavors": ["actual acidity", "syrup-like sweetness", "oh-sweet-surrender and mercy"],
+    "quotation": "That's coffee! This could pass for a low-grade specialty coffee.",
+    "rank": 1
+  }
+]
