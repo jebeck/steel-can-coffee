@@ -1,5 +1,6 @@
 .DS_Store
 *.css
+*.log
 *.pxm
 build/
 fontello/
