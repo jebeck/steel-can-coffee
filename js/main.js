@@ -88,11 +88,13 @@ var coffee = require('./index');
             for (var i = 0; i < Math.abs(diff); i++) {
               handleForwards();
             }
+            handleSpecial(d3.select(this));
           }
           else {
             for (var j = 0; j < diff; j++) {
               handleBack();
             }
+            handleSpecial(d3.select(this));
           }
         }
       });
