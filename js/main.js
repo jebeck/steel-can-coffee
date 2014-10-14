@@ -115,13 +115,13 @@ var coffee = require('./index');
         if (e.keyCode === 39 || (e.keyCode === 9 && !e.shiftKey)) {
           // preventDefault to stop tab (keyCode 9) from moving active focus to address bar
           e.preventDefault();
-          handleBack();
+          handleForwards();
         }
         // left is keyCode 37
         else if (e.keyCode === 37 || (e.keyCode === 9 && e.shiftKey)) {
           // preventDefault to stop tab (keyCode 9) from moving active focus to address bar
           e.preventDefault();
-          handleForwards();
+          handleBack();
         }
         else if (e.keyCode === 27) {
           viz.undrawFocus();
