@@ -6,7 +6,7 @@ var hastouch = require('./hastouch');
 module.exports = function(opts) {
   opts = opts || {};
   var defaults = {
-    duration: 1000,
+    duration: 800,
     focusRadiusRatio: 1.5
   };
 

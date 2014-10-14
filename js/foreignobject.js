@@ -4,7 +4,7 @@ var d3 = require('d3');
 module.exports = function(opts) {
   opts = opts || {};
   var defaults = {
-    duration: 500
+    duration: 400
   };
   _.defaults(opts, defaults);
 
