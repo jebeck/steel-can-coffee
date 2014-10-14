@@ -84,11 +84,11 @@ module.exports = function() {
         },
         radius: littleR,
         ranksToPosition: {
-          1: 'top',
-          2: 'rightMid',
+          5: 'top',
+          4: 'rightMid',
           3: 'rightBottom',
-          4: 'leftBottom',
-          5: 'leftMid'
+          2: 'leftBottom',
+          1: 'leftMid'
         },
         pathGenerator: this.pathGeneratorFn(textR),
         specialPosition: 'top',
@@ -129,11 +129,11 @@ module.exports = function() {
         },
         radius: 0.55 * this.h/5,
         ranksToPosition: {
-          1: 'side',
-          2: 'top',
+          5: 'side',
+          4: 'top',
           3: 'midTop',
-          4: 'midBottom',
-          5: 'bottom'
+          2: 'midBottom',
+          1: 'bottom'
         },
         pathGenerator: this.pathGeneratorFn(0.95 * (0.55 * this.h/5)),
         specialPosition: 'side',
@@ -183,11 +183,11 @@ module.exports = function() {
         },
         radius: r,
         ranksToPosition: {
-          1: 'top',
-          2: 'topLeft',
+          5: 'top',
+          4: 'topLeft',
           3: 'rightMid',
-          4: 'bottomLeft',
-          5: 'bottom'
+          2: 'bottomLeft',
+          1: 'bottom'
         },
         pathGenerator: this.pathGeneratorFn(0.95 * r),
         specialPosition: 'top'
@@ -224,11 +224,11 @@ module.exports = function() {
         },
         radius: r,
         ranksToPosition: {
-          1: 'topLeft',
-          2: 'bottomLeft',
+          5: 'topLeft',
+          4: 'bottomLeft',
           3: 'topMid',
-          4: 'bottomRight',
-          5: 'topRight'
+          2: 'bottomRight',
+          1: 'topRight'
         },
         pathGenerator: this.pathGeneratorFn(0.95 * r),
         specialPosition: 'topLeft'
