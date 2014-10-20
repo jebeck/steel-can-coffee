@@ -343,7 +343,7 @@ module.exports = function() {
       return function(x, y) {
         return {
           m: 'M' + (x - radius) + ',' + (y) + ' ',
-          a: 'a' + (radius) + ',' + (radius) + ' 0 1,0 ' + (radius) + ',' + (-radius)
+          a: 'a' + (radius) + ',' + (radius) + ' 0 0 0 ' + (2*radius) + ',0' 
         };
       };
     };
@@ -739,7 +739,7 @@ module.exports = function(opts) {
       .append('textPath')
       .attr({
         'font-size': (0.4 * shape.radius),
-        startOffset: '33%',
+        startOffset: '50%',
         'xlink:href': function(d) { return '#' + d.brand.replace(' ', '_') + 'Path'; },
         'class': 'coffee-brand',
       })
@@ -787,7 +787,7 @@ module.exports = function(opts) {
     circles.selectAll('.coffee-brand')
       .attr({
         'font-size': (0.4 * shape.radius),
-        startOffset: '33%'
+        startOffset: '50%'
       });
 
     if (viz.focused) {
