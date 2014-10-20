@@ -46,7 +46,7 @@ module.exports = function() {
       return function(x, y) {
         return {
           m: 'M' + (x - radius) + ',' + (y) + ' ',
-          a: 'a' + (radius) + ',' + (radius) + ' 0 1,0 ' + (radius) + ',' + (-radius)
+          a: 'a' + (radius) + ',' + (radius) + ' 0 0 0 ' + (2*radius) + ',0' 
         };
       };
     };
